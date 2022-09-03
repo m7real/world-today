@@ -18,7 +18,7 @@ const displayCategories = (categories) => {
 };
 
 const loadNews = (id, categoryName) => {
-  console.log(id);
+  //   console.log(id);
   const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
   fetch(url)
     .then((res) => res.json())
@@ -29,11 +29,62 @@ const loadNews = (id, categoryName) => {
 const displayNews = (data, categoryName) => {
   data.sort((a, b) => (b.total_view !== null ? b.total_view : -Infinity) - (a.total_view !== null ? a.total_view : -Infinity));
   console.log(data);
+  //   display news Count
   const newsCountContainer = document.getElementById("news-count-container");
-  //   newsCountContainer.textContent = ``;
   newsCountContainer.innerHTML = `
     <p class="px-3 py-3">${data.length ? data.length : "No"} News found for ${categoryName} category</p>
   `;
+
+  //   display news
+  const newsContainer = document.getElementById("news-container");
+  newsContainer.textContent = "";
+  data.forEach((news) => {
+    let details = news.details;
+    const detailsSplit = details.split(" ");
+    if (detailsSplit.length > 80) {
+      const detailsSliced = detailsSplit.slice(0, 80);
+      details = detailsSliced.join(" ") + "...";
+    }
+
+    const newsDiv = document.createElement("div");
+    newsDiv.classList.add("col");
+    newsDiv.innerHTML = `
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-3">
+                    <img src="${news.thumbnail_url}" class="img-fluid rounded-start p-3" alt="..." />
+                </div>
+                <div class="col-md-9 p-3">
+                    <div class="card-body" >
+                    <h5 class="card-title">${news.title}</h5>
+                    <p class="card-text">${details}</p>
+                    </div>
+                    <div class="row row-cols-3 pt-4">
+                        <div class="col ps-4">
+                            <img src="${news.author.img}" class="rounded img-fluid rounded-circle" style="width:25px"/>
+                            <span class="ps-2">${news.author.name ? news.author.name : "No Data Found"}</span>
+                        </div>
+                        <div class="col ps-4">
+                            <span class="p-1 text-secondary"><i class="fa-solid fa-eye"></i></span>
+                            <span>${news.total_view ? news.total_view : "No Data Found"}</span>
+                        </div>
+                        <div class="col ps-4">
+                        
+                        </div>
+
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    newsContainer.appendChild(newsDiv);
+  });
 };
+
+// ! Delete after testing
+loadNews("01", "Breaking News");
 
 loadCategories();
