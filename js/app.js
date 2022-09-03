@@ -66,15 +66,14 @@ const displayNews = (data, categoryName) => {
                         </div>
                         <div class="col ps-4">
                             <span class="p-1 text-secondary"><i class="fa-solid fa-eye"></i></span>
-                            <span>${news.total_view ? news.total_view : "No Data Found"}</span>
+                            <span>${news.total_view !== null ? news.total_view : "No Data Found"}</span>
                         </div>
-                        <div class="col ps-4">
-                        
+                        <div class="col ps-4 text-end pe-5">
+                            <button onclick="console.log('${
+                              news._id
+                            }')" class="btn btn-primary stretched-link px-3"><i class="fa-solid fa-arrow-right"></i></button>
                         </div>
 
-                        <div>
-
-                        </div>
                     </div>
                 </div>
             </div>
