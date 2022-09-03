@@ -34,7 +34,6 @@ const displayNews = (data, categoryName) => {
   newsCountContainer.innerHTML = `
     <p class="px-3 py-3">${data.length ? data.length : "No"} News found for ${categoryName} category</p>
   `;
-
   //   display news
   const newsContainer = document.getElementById("news-container");
   newsContainer.textContent = "";
@@ -64,16 +63,15 @@ const displayNews = (data, categoryName) => {
                             <img src="${news.author.img}" class="rounded img-fluid rounded-circle" style="width:25px"/>
                             <span class="ps-2">${news.author.name ? news.author.name : "No Data Found"}</span>
                         </div>
-                        <div class="col ps-4">
+                        <div class="col ps-4 text-center">
                             <span class="p-1 text-secondary"><i class="fa-solid fa-eye"></i></span>
                             <span>${news.total_view !== null ? news.total_view : "No Data Found"}</span>
                         </div>
                         <div class="col ps-4 text-end pe-5">
-                            <button onclick="console.log('${
+                            <button onclick="loadDetails('${
                               news._id
-                            }')" class="btn btn-primary stretched-link px-3"><i class="fa-solid fa-arrow-right"></i></button>
+                            }')" class="btn btn-primary stretched-link px-3" data-bs-toggle="modal" data-bs-target="#newsModal"><i class="fa-solid fa-arrow-right-long"></i></button>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -83,7 +81,41 @@ const displayNews = (data, categoryName) => {
   });
 };
 
-// ! Delete after testing
-loadNews("01", "Breaking News");
+const loadDetails = (id) => {
+  const url = `https://openapi.programming-hero.com/api/news/${id}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => displayDetails(data.data[0]))
+    .catch((error) => console.log(error));
+};
 
+const displayDetails = (news) => {
+  console.log(news);
+  const detailsContainer = document.getElementById("details-container");
+  detailsContainer.innerHTML = `
+          <div class="modal-content">
+            <div class="modal-header border-0">
+              <h5 class="modal-title" id="newsModalLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="card mb-3">
+                <img src="..." class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                  </p>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer border-0">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>  
+  `;
+};
+
+loadNews("01", "Breaking News");
 loadCategories();
