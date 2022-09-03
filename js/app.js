@@ -17,19 +17,23 @@ const displayCategories = (categories) => {
   });
 };
 
-const loadNews = (id) => {
+const loadNews = (id, categoryName) => {
   console.log(id);
   const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayNews(data.data))
+    .then((data) => displayNews(data.data, categoryName))
     .catch((error) => console.log(error));
 };
 
-const displayNews = (data) => {
-  console.log(data);
+const displayNews = (data, categoryName) => {
   data.sort((a, b) => (b.total_view !== null ? b.total_view : -Infinity) - (a.total_view !== null ? a.total_view : -Infinity));
   console.log(data);
+  const newsCountContainer = document.getElementById("news-count-container");
+  //   newsCountContainer.textContent = ``;
+  newsCountContainer.innerHTML = `
+    <p class="px-3 py-3">${data.length ? data.length : "No"} News found for ${categoryName} category</p>
+  `;
 };
 
 loadCategories();
