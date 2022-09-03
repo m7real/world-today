@@ -11,7 +11,7 @@ const displayCategories = (categories) => {
     const categoryLi = document.createElement("li");
     categoryLi.classList.add("nav-item");
     categoryLi.innerHTML = `
-        <a class="nav-link" href="#" onclick="loadNews('${category.category_id}')">${category.category_name}</a>
+        <a class="nav-link" href="#" onclick="loadNews('${category.category_id}','${category.category_name}')">${category.category_name}</a>
     `;
     categoryUl.appendChild(categoryLi);
   });
@@ -27,6 +27,8 @@ const loadNews = (id) => {
 };
 
 const displayNews = (data) => {
+  console.log(data);
+  data.sort((a, b) => (b.total_view !== null ? b.total_view : -Infinity) - (a.total_view !== null ? a.total_view : -Infinity));
   console.log(data);
 };
 
