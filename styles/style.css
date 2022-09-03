@@ -1,19 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Manrope:wght@300;400;500;600;700;800&display=swap');
 
-body {
+/* body {
     font-family: 'Manrope', sans-serif;
-}
+} */
 
 .cursive {
     font-family: 'Berkshire Swash', cursive;
     /* font-size: 1.5rem; */
 
 }
-
-/* hr {
-    height: 1px;
-
-    border: none;
-    padding: 0;
-    margin: 0;
-} */

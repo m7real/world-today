@@ -30,7 +30,6 @@ const loadNews = (id, categoryName, spin) => {
 
 const displayNews = (data, categoryName) => {
   data.sort((a, b) => (b.total_view !== null ? b.total_view : -Infinity) - (a.total_view !== null ? a.total_view : -Infinity));
-  console.log(data);
   //   display news Count
   const newsCountContainer = document.getElementById("news-count-container");
   newsCountContainer.innerHTML = `
@@ -99,7 +98,6 @@ const loadDetails = (id) => {
 };
 
 const displayDetails = (news) => {
-  console.log(news);
   const detailsContainer = document.getElementById("details-container");
   detailsContainer.innerHTML = `
           <div class="modal-content">
@@ -136,5 +134,6 @@ const displayDetails = (news) => {
   `;
 };
 
+// default loads
 loadNews("01", "Breaking News");
 loadCategories();
