@@ -37,7 +37,7 @@
       <hr class="bg-dark p-0 m-0" />
 
       <!-- Category start -->
-      <nav class="navbar navbar-expand-md px-lg-5 px-md-4 px-sm-3 px-1 py-md-2 bg-light">
+      <nav class="navbar navbar-expand-md mt-2 px-lg-5 px-md-4 px-sm-3 px-1 py-md-2 bg-light">
         <div class="container-fluid">
           <button
             class="navbar-toggler"
@@ -68,6 +68,16 @@
       </section>
       <!-- News Count Section End -->
 
+      <!-- spinner start -->
+      <section id="loader" class="d-none">
+        <div style="height: 400px" class="d-flex justify-content-center align-items-center">
+          <div class="spinner-border text-primary m-5" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </section>
+      <!-- spinner end -->
+
       <!-- News Card Start -->
       <section class="mt-5">
         <div id="news-container" class="row row-cols-1 g-4">
@@ -76,16 +86,13 @@
       </section>
       <!-- News Card End -->
 
-      <!--! Modal Start -->
-      <!-- Button trigger modal -->
-
-      <!-- Modal -->
+      <!-- Modal Start -->
       <div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true">
         <div id="details-container" class="modal-dialog modal-lg">
           <!-- Dynamic Modal Content Here -->
         </div>
       </div>
-      <!--! Modal End -->
+      <!-- Modal End -->
     </main>
     <!-- Main End -->
     <!-- Footer Start -->

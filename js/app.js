@@ -11,14 +11,16 @@ const displayCategories = (categories) => {
     const categoryLi = document.createElement("li");
     categoryLi.classList.add("nav-item");
     categoryLi.innerHTML = `
-        <a class="nav-link" href="#" onclick="loadNews('${category.category_id}','${category.category_name}')">${category.category_name}</a>
+        <a class="nav-link" href="#" onclick="loadNews('${category.category_id}','${category.category_name}', true)">${category.category_name}</a>
     `;
     categoryUl.appendChild(categoryLi);
   });
 };
 
-const loadNews = (id, categoryName) => {
-  //   console.log(id);
+const loadNews = (id, categoryName, spin) => {
+  if (spin) {
+    toggleSpinner(true);
+  }
   const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
   fetch(url)
     .then((res) => res.json())
@@ -79,6 +81,13 @@ const displayNews = (data, categoryName) => {
     `;
     newsContainer.appendChild(newsDiv);
   });
+  toggleSpinner(false);
+};
+
+// spinner
+const toggleSpinner = (isLoading) => {
+  const loaderSection = document.getElementById("loader");
+  isLoading ? loaderSection.classList.remove("d-none") : loaderSection.classList.add("d-none");
 };
 
 const loadDetails = (id) => {
