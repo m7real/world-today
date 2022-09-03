@@ -65,7 +65,7 @@ const displayNews = (data, categoryName) => {
                         </div>
                         <div class="col ps-4 text-center">
                             <span class="p-1 text-secondary"><i class="fa-solid fa-eye"></i></span>
-                            <span>${news.total_view !== null ? news.total_view : "No Data Found"}</span>
+                            <span>${news.total_view || news.total_view === 0 ? news.total_view : "No Data Found"}</span>
                         </div>
                         <div class="col ps-4 text-end pe-5">
                             <button onclick="loadDetails('${
@@ -95,25 +95,35 @@ const displayDetails = (news) => {
   detailsContainer.innerHTML = `
           <div class="modal-content">
             <div class="modal-header border-0">
-              <h5 class="modal-title" id="newsModalLabel">Modal title</h5>
+              <p class="text-muted">Published: ${news.author?.published_date ? news.author.published_date : "No Data Found"}</p>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body p-4">
               <div class="card mb-3">
-                <img src="..." class="card-img-top" alt="..." />
+                <img src="${news.image_url}" class="card-img-top" alt="..." />
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                  </p>
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  <h5 class="card-title">${news.title}</h5>
+                  <p class="card-text">${news.details}</p>
+                </div>
+                <div class="row row-cols-3 py-4 ">
+                  <div class="col ps-4">
+                    <img src="${news.author.img}" class="rounded img-fluid rounded-circle" style="width: 25px" />
+                    <span class="ps-2">${news.author.name ? news.author.name : "No Data Found"}</span>
+                  </div>
+                  <div class="col ps-4 text-center">
+                    <span class="p-1 text-secondary"><i class="fa-solid fa-eye"></i></span>
+                    <span>${news.total_view || news.total_view === 0 ? news.total_view : "No Data Found"}</span>
+                  </div>
+                  <div class="col ps-4 text-center">
+                    <p>Rating: ${news.rating?.number ? news.rating.number : "No Data Found"}</p>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="modal-footer border-0">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
-          </div>  
+          </div>
   `;
 };
 
